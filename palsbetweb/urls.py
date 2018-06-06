@@ -19,7 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
 
-    path('1xpredictcdenis/', admin.site.urls),
+    path('footballsurebetscjohn/', admin.site.urls),
 
     path('', include ('palsbet.urls')),
 

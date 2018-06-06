@@ -13,20 +13,18 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 from django.contrib import admin
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(k#r1=fxip4p5+ku52s@oym%5yj%u=u-kz#uq#d056px*@8)('
+SECRET_KEY = '(k#r1=fxip4p5+u52s@oyyj%u=u-kzuq#d056px*@8)('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['footballsurebets.herokuapp.com']
 
 
 # Application definition
@@ -44,13 +42,15 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'palsbet.middleware.PreventConcurrentLoginsMiddleware'
+    'palsbet.middleware.PreventConcurrentLoginsMiddleware',
+    
 
 
 ]
@@ -85,6 +85,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 
 # Password validation
@@ -123,11 +124,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(os.path.normpath(BASE_DIR), "static")
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+
 
 LOGIN_REDIRECT_URL = '/home_vip'
 
 LOGOUT_REDIRECT_URL = '/viptips'
 
-admin.site.site_header = 'PalsBet Admin Panel'
-admin.site.site_title = 'PalsBet Admin Panel'
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config()}
+
+admin.site.site_header = '1XPredict  Admin Panel'
+admin.site.site_title = '1XPredict Admin Panel'
+
+ADMINS = (('Denis Kiprono', 'deniskiprono4@gmail.com'),)
