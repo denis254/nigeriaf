@@ -1,0 +1,41 @@
+{% extends "main_template.html" %}
+{% load static %}
+{% block title %}
+
+Footballsurebets.com - Roll Over Plan
+
+{% endblock %}
+
+{% block header %}
+
+{% include "header.html" %}
+
+{% endblock %}
+
+{% block over_view_contact %}
+
+{% include "over_view_contact.html" %}
+
+{% endblock %}
+
+{% block content %}
+
+<div align = "center">
+
+{% for item in Notifications %}
+
+<hr>
+      <h6 class="h4">{{item.Head}}</h6>
+      <p>{{item.Body}}<p>
+       <i><p align = "right" style="color:green">{{item.published_date}}<p></i>
+<hr>
+{% endfor %}
+
+
+{% endblock %}
+
+{% block footer %}
+
+{% include "footer.html" %}
+
+{% endblock %}

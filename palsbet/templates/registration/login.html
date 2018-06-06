@@ -1,0 +1,35 @@
+{% extends "main_template.html" %}
+
+{% block title %}
+
+PalsBet Log In Page
+
+{% endblock %}
+
+{% block header %}
+
+{% include "header.html" %}
+
+{% endblock %}
+
+{% block content %}
+
+<div align = "center">
+
+<h2 class="h4">Login To Footballsurebets Vip</h2>
+
+<form method="post" autocomplete="off" >
+  {% csrf_token %}
+  <div style="color:blue"><b>{{ form.as_p }}</b></div>
+  <button type="submit" id="back" >Login</button>
+</form>
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+
+{% include "footer.html" %}
+
+{% endblock %}
